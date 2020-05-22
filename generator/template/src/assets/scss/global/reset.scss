@@ -1,0 +1,72 @@
+/**
+ * @Desc 重设样式
+ */
+
+@import '../var';
+
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html, body{
+	font-family: $g-ff;
+  font-weight: normal;
+  font-size: $g-fs-bs;
+	width: 100%;
+  color: $g-color-font--normal;
+
+  // 设定最小宽度
+  min-width: 768px;
+  // 关闭y轴滚动
+  overflow-y: hidden;
+}
+
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+i{
+  font-style: normal;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+img {
+  border: none;
+  max-width: 100%;
+}
+
+input, button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: $g-color-font--placeholder;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: $g-color-font--placeholder;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: $g-color-font--placeholder;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $g-color-font--placeholder;
+}

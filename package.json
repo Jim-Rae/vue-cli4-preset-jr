@@ -1,0 +1,23 @@
+{
+  "name": "vue-cli4-preset-jr",
+  "version": "1.0.0",
+  "description": "vue-cli4 preset",
+  "main": "./generator/index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jim-Rae/vue-cli4-preset-jr.git"
+  },
+  "keywords": [
+    "vue-cli4",
+    "preset"
+  ],
+  "author": "Jim Rae",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.4.1"
+  }
+}

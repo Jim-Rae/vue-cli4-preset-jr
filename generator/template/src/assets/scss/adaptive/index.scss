@@ -1,0 +1,50 @@
+/*
+ * @Author: Jim Rae
+ * @Date: 2019-10-24 09:24:22
+ * @LastEditors: Jim Rae
+ * @LastEditTime: 2020-05-22 16:19:59
+ * @Description: 通过@media查询响应式设置样式
+ */
+
+@import '../var';
+
+// 小屏样式
+@mixin g-media-sm () {
+	@media screen and (max-width: $g-media-md) {
+		@content;
+	}
+}
+// 中屏样式
+@mixin g-media-md () {
+	@media screen and (min-width: $g-media-md) {
+		@content;
+	}
+}
+// 大屏样式
+@mixin g-media-lg () {
+	@media screen and (min-width: $g-media-lg) {
+		@content;
+	}
+}
+
+// 适用场景：大中小屏下，设置单个样式值
+@mixin g-media-attr ($attr, $sm, $md, $lg) {
+  @if $attr {
+    @if $sm {
+      @include g-media-sm () {
+        #{$attr}: $sm;
+      }
+    }
+    @if $md {
+      @include g-media-md () {
+        #{$attr}: $md;
+      }
+    }
+    @if $lg {
+      @include g-media-lg () {
+        #{$attr}: $lg;
+      }
+    }
+    transition: $attr .5s;
+  }
+}

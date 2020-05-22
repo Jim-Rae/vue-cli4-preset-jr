@@ -1,0 +1,38 @@
+{
+  "useConfigFiles": true,
+  "routerHistoryMode": false,
+  "cssPreprocessor": "dart-sass",
+  "plugins": {
+    "@vue/cli-plugin-babel": {},
+    "@vue/cli-plugin-eslint": {
+      "config": "standard",
+      "lintOn": [
+        "save",
+        "commit"
+      ]
+    }
+  },
+  "configs": {
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "node": true
+      },
+      "extends": [
+        "plugin:vue/essential",
+        "@vue/standard"
+      ],
+      "parserOptions": {
+        "parser": "babel-eslint"
+      },
+      "rules": {
+        "semi": "off",
+        "prefer-promise-reject-errors": "off"
+      }
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions"
+    ]
+  }
+}

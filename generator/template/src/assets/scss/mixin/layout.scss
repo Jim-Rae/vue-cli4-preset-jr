@@ -1,0 +1,68 @@
+/**
+ * @Author: Jim Rae
+ * @Date: 2019-09-05
+ * @Last Modified by: Jim Rae
+ * @Last Modified time: 2019-09-05
+ * @Desc 布局mixin
+ */
+
+
+/** transform方式居中
+ * @mixin g-layout-center-transform
+ * @param $axis 需要居中的轴线，x: 水平居中、y: 垂直居中、both: 水平垂直居中
+ */
+ @mixin g-layout-center-transform ($axis: 'both') {
+  @if $axis == 'both' {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $axis == 'x' {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $axis == 'y' {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/** margin方式居中
+ * @mixin g-layout-center-margin
+ * @param $width 子元素宽度
+ * @param $height 子元素高度
+ * @param $axis 需要居中的轴线，x: 水平居中、y: 垂直居中、both: 水平垂直居中
+ */
+ @mixin g-layout-center-margin ($width, $height, $axis: 'both') {
+  @if $axis == 'both' {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: - $width / 2;
+    margin-top: - $height / 2;
+  } @else if $axis == 'x' {
+    position: absolute;
+    left: 50%;
+    margin-left: - $width / 2;
+  } @else if $axis == 'y' {
+    position: absolute;
+    top: 50%;
+    margin-top: - $height / 2;
+  }
+}
+
+/** flex 布局和 子元素 对其方式
+ * @mixin g-layout-flex
+ * @param $justify-content justify-content属性
+ * @param $align-items align-items属性
+ * @param $flex-direction flex-direction属性
+ * @param $flex-wrap flex-wrap属性
+ */
+@mixin g-layout-flex($justify-content: space-between, $align-items: center, $flex-direction: row, $flex-wrap: nowrap){
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+	justify-content: $justify-content;
+	align-items: $align-items;
+}
