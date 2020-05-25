@@ -21,13 +21,12 @@ export default {
   name: 'demo',
   created () {
     this.$_distpicker.init('请选择地区', value => {
-      this.$toast(`你选择了${value.province}${value.city}${value.district}`)
-      console.log(`你选择了${value.province}${value.city}${value.district}`)
+      this.$toast(`你选择了${value.province}${value.city}${value.district}`);
+      console.log(`你选择了${value.province}${value.city}${value.district}`);
     })
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index';

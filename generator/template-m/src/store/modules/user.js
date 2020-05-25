@@ -1,51 +1,44 @@
-import { Api } from '@/api'
-import router from '@/router'
+import { Api } from '@/api';
+import router from '@/router';
 
 const state = {
   userInfo: {}
-}
+};
 
 const getters = {
   userType: state => state.userInfo.type,
   username: state => state.userInfo.username
-}
+};
 
 const mutations = {
   setUserInfo (state, userInfo) {
-    state.userInfo = userInfo
+    state.userInfo = userInfo;
   }
-}
+};
 
 const actions = {
   getRouteInfo ({ rootState }) {
-    console.log('routeInfo: ', rootState.route)
+    console.log('routeInfo: ', rootState.route);
   },
 
   async getUserInfo ({ commit }) {
     try {
-      const res = await Api.getUserInfo()
-      if (res.status) {
-        commit('setUserInfo', res.data)
-        return res.data
-      } else {
-        router.push({ name: 'login' })
-      }
+      const data = await Api.getUserInfo();
+      commit('setUserInfo', data);
+      return data;
     } catch (error) {
-      console.log(error)
+      console.error(error);
+      return false;
     }
   },
 
   async logout ({ commit }) {
     try {
-      const res = await Api.logout()
-      if (res.status) {
-        commit('setUserInfo', {})
-        router.push({ name: 'login' })
-      } else {
-        console.log(res.message)
-      }
+      await Api.logout();
+      commit('setUserInfo', {});
+      router.push({ name: 'login' });
     } catch (error) {
-      console.log(error)
+      console.error(error);
     }
   }
 }
@@ -56,4 +49,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

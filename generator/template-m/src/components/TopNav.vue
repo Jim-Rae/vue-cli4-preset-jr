@@ -51,9 +51,9 @@ export default {
   methods: {
     clickBack () {
       if (this.backUrl) {
-        this.$router.replace(this.backUrl)
+        this.$router.replace(this.backUrl);
       } else {
-        this.$router.go(-1)
+        this.$router.go(-1);
       }
     }
   }

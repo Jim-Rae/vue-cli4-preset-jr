@@ -23,6 +23,7 @@
         var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
         var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
         if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+          alert('检测到终端类型为pc端，即将跳转到pc端url');
           // 跳转到你的pc端url
           window.location.href = "https://baidu.com"
         }

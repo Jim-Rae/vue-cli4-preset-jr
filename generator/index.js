@@ -40,24 +40,11 @@ module.exports = (api, options, rootOptions) => {
       },
       devDependencies: {
         "babel-plugin-import": "^1.12.2",
-        "cssnano": "^4.1.10",
-        "postcss-aspect-ratio-mini": "^1.0.1",
-        "postcss-cssnext": "^3.1.0",
-        "postcss-import": "^12.0.1",
         "postcss-px-to-viewport": "^1.1.1",
-        "postcss-url": "^8.0.0",
         "postcss-viewport-units": "^0.1.6",
-        "postcss-write-svg": "^3.0.1"
       },
       postcss: {
         "plugins": {
-          "postcss-import": {},
-          "postcss-url": {},
-          "postcss-aspect-ratio-mini": {},
-          "postcss-write-svg": {
-            "utf8": false
-          },
-          "postcss-cssnext": {},
           "postcss-px-to-viewport": {
             "viewportWidth": 750,
             "viewportHeight": 1334,
@@ -71,17 +58,13 @@ module.exports = (api, options, rootOptions) => {
             "minPixelValue": 1,
             "mediaQuery": false
           },
-          "postcss-viewport-units": {},
-          "cssnano": {
-            "autoprefixer": false,
-            "postcss-zindex": false
-          }
+          "postcss-viewport-units": {}
         }
       }
     })
   }
 
-  // 删除 vue-cli3 默认目录
+  // 删除 vue-cli4 默认目录
   api.render(files => {
     Object.keys(files)
       .filter(path => path.startsWith('src/') || path.startsWith('public/'))

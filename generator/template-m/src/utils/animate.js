@@ -20,7 +20,7 @@ const scrollAnimateTo = (element, to, duration) => {
   const cosParameter = scrollRange / 2
   let count = 0
   let stepValue
-  let interval = setInterval(() => {
+  const interval = setInterval(() => {
     if (Math.abs(to - element.scrollTop) > 10) {
       count = count + 1
       stepValue = cosParameter - cosParameter * Math.cos(count * step)

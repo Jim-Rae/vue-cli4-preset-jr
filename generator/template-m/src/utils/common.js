@@ -1,41 +1,41 @@
-/**
+/*
  * @Author: Jim Rae
- * @Date: 2019-09-04
- * @Last Modified by: Jim Rae
- * @Last Modified time: 2019-11-25
- * @Desc 常用工具库
+ * @Date: 2019-09-04 09:24:22
+ * @LastEditors: Jim Rae
+ * @LastEditTime: 2020-05-25 09:34:11
+ * @Description: 常用工具库
  */
 
-import { isArray } from './validator'
+import { isArray } from './validator';
 
 /**
  * 计算浏览器默认滚动条宽度
  * @method computeScrollBarWidth
  * @return {Number} 浏览器默认滚动条宽度
  */
-const computeScrollBarWidth = () => {
+export const computeScrollBarWidth = () => {
   // 创建一个div来计算浏览器默认滚动条宽度
-  const box = document.createElement('div')
-  box.style.width = '100px'
-  box.style.height = '100px'
-  box.style.visibility = 'hidden'
-  box.style.position = 'absolute'
-  box.style.top = '-9999px'
-  box.style.overflow = 'scroll'
-  document.body.appendChild(box)
+  const box = document.createElement('div');
+  box.style.width = '100px';
+  box.style.height = '100px';
+  box.style.visibility = 'hidden';
+  box.style.position = 'absolute';
+  box.style.top = '-9999px';
+  box.style.overflow = 'scroll';
+  document.body.appendChild(box);
 
   // 兼容ie, 由于在ie中，如果div里没有内容，clientWidth会为0
-  const inner = document.createElement('div')
-  inner.style.width = '100%'
-  inner.style.height = '200%'
-  box.appendChild(inner)
+  const inner = document.createElement('div');
+  inner.style.width = '100%';
+  inner.style.height = '200%';
+  box.appendChild(inner);
 
   // 在box没有border的情况下，box.offsetWidth和box.clientWidth的差值就是滚动条宽度
-  const scrollBarWidth = box.offsetWidth - box.clientWidth
+  const scrollBarWidth = box.offsetWidth - box.clientWidth;
 
-  box.parentNode.removeChild(box)
+  box.parentNode.removeChild(box);
 
-  return scrollBarWidth
+  return scrollBarWidth;
 }
 
 /**
@@ -44,27 +44,17 @@ const computeScrollBarWidth = () => {
  * @param {Object} obj 需要拷贝的对象
  * @param {Array<String>} keysArr 过滤要拷贝的字段
  */
-const fastCopy = (obj, keysArr) => {
-  const clone = window.JSON.parse(window.JSON.stringify(obj))
+export const fastCopy = (obj, keysArr) => {
+  const clone = window.JSON.parse(window.JSON.stringify(obj));
   if (!keysArr) {
-    return clone
+    return clone;
   }
 
-  const result = {}
+  const result = {};
   keysArr.forEach(key => {
-    result[key] = clone[key]
+    result[key] = clone[key];
   })
-  return result
-}
-
-/**
- * 去除字符串前后的空格
- *
- * @param {string} str 需要操作的字符串
- * @returns {String}
- */
-function trim (str) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '')
+  return result;
 }
 
 /**
@@ -73,23 +63,23 @@ function trim (str) {
  * @param {Object|Array} obj 要遍历的数组或者对象
  * @param {Function} fn 每个项需要调用的函数
  */
-function forEach (obj, fn) {
+export const forEach = (obj, fn) => {
   if (obj === null || typeof obj === 'undefined') {
-    return
+    return;
   }
 
   if (typeof obj !== 'object') {
-    obj = [obj]
+    obj = [obj];
   }
 
   if (isArray(obj)) {
     for (var i = 0, l = obj.length; i < l; i++) {
-      fn(obj[i], i, obj)
+      fn(obj[i], i, obj);
     }
   } else {
     for (var key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        fn(obj[key], key, obj)
+        fn(obj[key], key, obj);
       }
     }
   }
@@ -102,20 +92,20 @@ function forEach (obj, fn) {
  * @param {object} obj1 需要合并的对象
  * @returns {object} 合并后的对象
  */
-function deepMerge (...params) {
-  var result = {}
+export const deepMerge = (...params) => {
+  var result = {};
   function assignValue (val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = deepMerge(result[key], val)
+      result[key] = deepMerge(result[key], val);
     } else {
-      result[key] = val
+      result[key] = val;
     }
   }
 
   for (var i = 0, l = params.length; i < l; i++) {
-    forEach(params[i], assignValue)
+    forEach(params[i], assignValue);
   }
-  return result
+  return result;
 }
 
 /**
@@ -126,21 +116,20 @@ function deepMerge (...params) {
  * @param {String} seperator 分隔符
  * @returns {String} 当天日期YYYY-MM-DD
  */
-function dateToString (dateInstance, seperator = '-') {
-  const year = dateInstance.getFullYear()
-  const month = dateInstance.getMonth() + 1
-  const date = dateInstance.getDate()
-  let yearStr = year.toString()
-  let monthStr = ''
-  let dateStr = ''
+export const dateToString = (dateInstance, seperator = '-') => {
+  const year = dateInstance.getFullYear();
+  const month = dateInstance.getMonth() + 1;
+  const date = dateInstance.getDate();
+  const yearStr = year.toString();
+  let monthStr = '';
+  let dateStr = '';
   if (month >= 1 && month <= 9) {
-    monthStr = '0' + month
+    monthStr = '0' + month;
   }
   if (date >= 0 && date <= 9) {
-    dateStr = '0' + date
+    dateStr = '0' + date;
   }
-  const currentdate = yearStr + seperator + monthStr + seperator + dateStr
-  return currentdate
+  return yearStr + seperator + monthStr + seperator + dateStr;
 }
 
 /**
@@ -151,8 +140,8 @@ function dateToString (dateInstance, seperator = '-') {
  * @param {String} prefix 前缀
  * @returns {String} 周几
  */
-function getWeekNameFromDate (date, prefix = '周') {
-  return prefix + '日一二三四五六'.charAt(date.getDay())
+export const getWeekNameFromDate = (date, prefix = '周') => {
+  return prefix + '日一二三四五六'.charAt(date.getDay());
 }
 
 /**
@@ -161,7 +150,7 @@ function getWeekNameFromDate (date, prefix = '周') {
  * 传入数字字符串则没有限制
  * @param {number|string} digit
  */
-function toZhDigit (digit) {
+export const toZhDigit = digit => {
   digit = typeof digit === 'number' ? String(digit) : digit
   const zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
   const unit = ['千', '百', '十', '']
@@ -170,13 +159,13 @@ function toZhDigit (digit) {
   let breakLen = Math.ceil(digit.length / 4)
   let notBreakSegment = digit.length % 4 || 4
   let segment
-  let zeroFlag = []; let allZeroFlag = []
+  const zeroFlag = []; const allZeroFlag = []
   let result = ''
 
   while (breakLen > 0) {
     if (!result) { // 第一次执行
       segment = digit.slice(0, notBreakSegment)
-      let segmentLen = segment.length
+      const segmentLen = segment.length
       for (let i = 0; i < segmentLen; i++) {
         if (segment[i] !== 0) {
           if (zeroFlag.length > 0) {
@@ -268,7 +257,7 @@ function toZhDigit (digit) {
  * @param {number} price 需要转换的价格
  * @returns {String} 保留两位小数的金额格式
  */
-function parsePriceFormat (price) {
+export const parsePriceFormat = price => {
   const str = price.toFixed(2)
   let newStr = ''
   let count = 0
@@ -306,7 +295,7 @@ function parsePriceFormat (price) {
  * @param {string} type 事件类型
  * @param {any} handler 事件处理函数
  */
-function registerEvent (target, type, handler) {
+export const registerEvent = (target, type, handler) => {
   if (target.addEventListener) {
     target.addEventListener(type, handler)
   } else if (target.attachEvent) {
@@ -325,7 +314,7 @@ function registerEvent (target, type, handler) {
  * @param {string} type 事件类型
  * @param {any} handler 事件处理函数
  */
-function removeEvent (target, type, handler) {
+export const removeEvent = (target, type, handler) => {
   if (target.removeEventListener) {
     target.removeEventListener(type, handler)
   } else if (target.detachEvent) {
@@ -343,13 +332,13 @@ function removeEvent (target, type, handler) {
  * @param {(...args: any) => void} fn 要去抖的函数
  * @param {number} delay 去抖时间
  */
-function debounce (fn, delay = 100) {
-  let timer = 0;
+export const debounce = (fn, delay = 100) => {
+  let timer = 0
   return function (...args) {
-    timer && clearTimeout(timer);
+    timer && clearTimeout(timer)
     timer = setTimeout(() => {
-      fn.apply(this, args);
-    }, delay);
+      fn.apply(this, args)
+    }, delay)
   }
 }
 
@@ -360,29 +349,24 @@ function debounce (fn, delay = 100) {
  * @param {(...args: any) => void} fn 要节流的函数
  * @param duration 节流时间间隔
  */
-function throttle (fn, duration = 100) {
-  let begin = new Date().getTime();
+export const throttle = (fn, duration = 100) => {
+  let begin = new Date().getTime()
   return function (...args) {
-    let current = new Date().getTime();
+    const current = new Date().getTime()
     if (current - begin >= duration) {
       fn.apply(this, args)
-      begin = current;
+      begin = current
     }
   }
 }
 
-export {
-  computeScrollBarWidth,
-  fastCopy,
-  trim,
-  forEach,
-  deepMerge,
-  dateToString,
-  getWeekNameFromDate,
-  toZhDigit,
-  parsePriceFormat,
-  registerEvent,
-  removeEvent,
-  debounce,
-  throttle
-}
+/**
+ * @description: 将表单验证转换成 promise
+ * @param {ElForm} form 表单
+ * @return {Promise}
+ */
+export const formValidate2Promise = form => new Promise((resolve, reject) => {
+  form.validate(valid => {
+    valid ? resolve() : reject('表单输入有误，请检查');
+  });
+});

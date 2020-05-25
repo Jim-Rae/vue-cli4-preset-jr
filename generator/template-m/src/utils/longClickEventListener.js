@@ -41,6 +41,7 @@ export default class LCEvent {
   removeLCHandler (handler) {
     return this._removeHandler(this._lCHandlers, handler);
   }
+
   // 移除点击事件处理函数
   removeCHandler (handler) {
     return this._removeHandler(this._cHandlers, handler);

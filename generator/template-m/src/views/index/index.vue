@@ -6,7 +6,7 @@
     <router-link :to="{name: 'demo'}">
       <van-button type="primary" class="button">查看demo</van-button>
     </router-link>
-    <p class="link"><a href="https://github.com/Jim-Rae/vue-cli3-preset-jr">https://github.com/Jim-Rae/vue-cli3-preset-jr</a></p>
+    <p class="link"><a href="https://github.com/Jim-Rae/vue-cli4-preset-jr">https://github.com/Jim-Rae/vue-cli4-preset-jr</a></p>
     <footer class="copyright">
       Copyright © JimRae. All rights reserved.
     </footer>

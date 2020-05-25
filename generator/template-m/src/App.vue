@@ -9,7 +9,3 @@ export default {
   [h('router-view')])
 }
 </script>
-
-<style lang="scss">
-
-</style>

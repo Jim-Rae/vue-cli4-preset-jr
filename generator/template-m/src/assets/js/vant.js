@@ -3,7 +3,7 @@
  * 按需引入vant组件
  */
 
-import Vue from 'vue'
+import Vue from 'vue';
 
 import {
   Button,
@@ -11,10 +11,10 @@ import {
   Dialog,
   Toast,
   Popup
-} from 'vant'
+} from 'vant';
 
-Vue.use(Button)
-Vue.use(Picker)
-Vue.use(Toast)
-Vue.use(Dialog)
-Vue.use(Popup)
+Vue.use(Button);
+Vue.use(Picker);
+Vue.use(Toast);
+Vue.use(Dialog);
+Vue.use(Popup);

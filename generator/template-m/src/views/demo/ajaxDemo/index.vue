@@ -22,21 +22,17 @@ export default {
     }
   },
   created () {
-    this.getList()
+    this.getList();
   },
   methods: {
     async getList () {
-      try {
-        const res = await this.$_api.getList()
-        this.list = res.map((item) => {
-          return {
-            title: item.title,
-            image: 'http://jimrae.top' + item.image
-          }
-        })
-      } catch (error) {
-        console.log(error)
-      }
+      const res = await this.$_api.getList();
+      this.list = res.map((item) => {
+        return {
+          title: item.title,
+          image: 'http://jimrae.top' + item.image
+        }
+      });
     }
   }
 }

@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import DISTRICTS from './districts'
+import DISTRICTS from './districts';
 
-const DEFAULT_CODE = 100000
+const DEFAULT_CODE = 100000;
 
 export default {
   name: 'my-distpicker',
@@ -52,45 +52,45 @@ export default {
   },
   computed: {
     distpicker () {
-      return this.$refs.distpicker
+      return this.$refs.distpicker;
     }
   },
   watch: {
     province (val) {
-      let citys = this.getDistricts(this.getAreaCode(val))
-      this.distpicker.setColumnValues(1, Object.keys(citys).map(key => citys[key]))
-      this.city = this.distpicker.getColumnValues(1)[0]
+      const citys = this.getDistricts(this.getAreaCode(val));
+      this.distpicker.setColumnValues(1, Object.keys(citys).map(key => citys[key]));
+      this.city = this.distpicker.getColumnValues(1)[0];
     },
     city (val) {
-      let districts = this.getDistricts(this.getAreaCode(val))
-      this.distpicker.setColumnValues(2, Object.keys(districts).map(key => districts[key]))
-      this.district = this.distpicker.getColumnValues(2)[0]
+      const districts = this.getDistricts(this.getAreaCode(val));
+      this.distpicker.setColumnValues(2, Object.keys(districts).map(key => districts[key]));
+      this.district = this.distpicker.getColumnValues(2)[0];
     }
   },
   created () {
-    let provinces = this.getDistricts()
-    this.columns[0].values = Object.keys(provinces).map(key => provinces[key])
+    const provinces = this.getDistricts();
+    this.columns[0].values = Object.keys(provinces).map(key => provinces[key]);
   },
   methods: {
     getDistricts (code = DEFAULT_CODE) {
-      return DISTRICTS[code] || {}
+      return DISTRICTS[code] || {};
     },
     getAreaCode (name) {
-      for (let x in DISTRICTS) {
-        for (let y in DISTRICTS[x]) {
+      for (const x in DISTRICTS) {
+        for (const y in DISTRICTS[x]) {
           if (name === DISTRICTS[x][y]) {
-            return y
+            return y;
           }
         }
       }
     },
     onValuesChange (picker, values) {
-      this.province = values[0]
-      this.city = values[1]
-      this.district = values[2]
+      this.province = values[0];
+      this.city = values[1];
+      this.district = values[2];
     },
     confirm () {
-      this.visible = false
+      this.visible = false;
       this.callback({
         province: this.province,
         city: this.city,
@@ -98,17 +98,17 @@ export default {
       })
     },
     init (title, callback) {
-      this.title = title
-      this.callback = callback
+      this.title = title;
+      this.callback = callback;
     },
     show () {
-      this.visible = true
+      this.visible = true;
       this.$nextTick(() => {
-        this.province = this.columns[0].values[0]
+        this.province = this.columns[0].values[0];
       })
     },
     close () {
-      this.visible = false
+      this.visible = false;
     }
   }
 }

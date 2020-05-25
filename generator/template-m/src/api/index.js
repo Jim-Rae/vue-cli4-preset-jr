@@ -1,9 +1,9 @@
-import http from './axios-config'
-// import mockData from './mock'
-import qs from 'qs'
+import http from './axios-config';
+// import mockData from './mock';
+import qs from 'qs';
 
 // 是否开启模拟数据
-// const mockSwitch = false
+// const mockSwitch = false;
 
 const api = {
   // GET方法示例（简洁配置）
@@ -51,7 +51,7 @@ const api = {
   // 退登
   logout: () => http.get('/api/logout')
 
-}
+};
 
 export default {
   install (Vue) {
@@ -61,6 +61,6 @@ export default {
       }
     })
   }
-}
+};
 
-export { api as Api }
+export { api as Api };
