@@ -10,3 +10,8 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .el-message__icon, .el-message__content {
   float: left;
 }
+
+// 解决el-scrollbar出现原生横向滚动条问题，添加该样式后导致无法用 shift + 鼠标滚轮 横向滚动页面，只能通过点击或拖动横向滚动条横向滚动页面
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}

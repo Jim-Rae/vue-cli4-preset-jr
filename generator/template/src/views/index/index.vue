@@ -3,7 +3,7 @@
     <el-container style="height: 100vh">
       <el-header height="60px">
         <img class="logo" src="@/assets/img/logo.png" alt="logo">
-        <span class="title">基于vue-cli3的前端项目模板</span>
+        <span class="title">基于vue-cli4的前端项目模板</span>
         <router-link
           v-if="!username"
           class="login-btn"
@@ -26,10 +26,6 @@
               <el-menu-item index="/breadcrumbDemo/first">第一个页面</el-menu-item>
               <el-menu-item index="/breadcrumbDemo/second">第二个页面</el-menu-item>
             </el-submenu>
-            <el-menu-item index="/scrollDemo/index">
-              <i class="el-icon-orange"></i>
-              <span slot="title">自定义滚动条Demo</span>
-            </el-menu-item>
             <el-menu-item index="/ajaxDemo/index">
               <i class="el-icon-cherry"></i>
               <span slot="title">异步数据请求Demo</span>
@@ -38,9 +34,9 @@
         </el-aside>
         <el-main>
           <breadcrumb/>
-          <awesome-scrollbar-box class="calc-height">
+          <el-scrollbar class="calc-height">
             <router-view class="view"/>
-          </awesome-scrollbar-box>
+          </el-scrollbar>
         </el-main>
       </el-container>
     </el-container>

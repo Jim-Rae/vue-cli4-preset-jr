@@ -20,7 +20,7 @@ module.exports = (api, options, rootOptions) => {
     // pc端配置
     api.extendPackage({
       dependencies: {
-        "element-ui": "^2.11.1"
+        "element-ui": "^2.13.2"
       },
       devDependencies: {
         'babel-plugin-component': '^1.1.1'
