@@ -7,6 +7,7 @@ import api from './api';
 import './components';
 import './assets/js/vant';
 import './plugins';
+import './filter';
 
 // 引入全局样式
 import './assets/scss/global/index.scss';

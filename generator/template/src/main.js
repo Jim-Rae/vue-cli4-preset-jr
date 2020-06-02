@@ -6,6 +6,7 @@ import { sync } from 'vuex-router-sync';
 import api from './api';
 import './components';
 import './assets/js/element';
+import './filter';
 
 // 引入全局样式
 import './assets/scss/global/index.scss';
