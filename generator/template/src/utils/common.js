@@ -2,11 +2,12 @@
  * @Author: Jim Rae
  * @Date: 2019-09-04 09:24:22
  * @LastEditors: leijin
- * @LastEditTime: 2020-06-02 17:12:22
+ * @LastEditTime: 2020-06-08 17:50:39
  * @Description: 常用工具库
  */
 
 import { isArray } from './validator';
+import { getStyle } from './dom';
 
 /**
  * 快速深拷贝
@@ -161,3 +162,50 @@ export const formValidate2Promise = form => new Promise((resolve, reject) => {
     valid ? resolve() : reject('表单输入有误，请检查');
   });
 });
+
+/**
+ * @description: 通过一个或多个源对象去赋值目标对象，只复制目标对象有的字段（浅复制）
+ * @param {Object} target 目标对象
+ * @param {...Object} ...objs 其他源对象
+ */
+export const assignObjectNoExtend = (target, ...objs) => {
+  if (typeof target !== 'object') return;
+  const tmpObj = Object.assign({}, ...objs);
+  Object.keys(target).forEach(key => {
+      tmpObj[key] && (target[key] = tmpObj[key]);
+  });
+  return target;
+}
+
+/**
+ * @description: 通过某个字段搜索出某个元素在对象数组里的位置
+ * @param {Array} arr 要搜索的数组
+ * @param {String} field 搜索字段名
+ * @param {any} val 搜索字段的值
+ * @return {Number}
+ */
+export const getIndexByField = (arr, field, val) => {
+  if (!arr instanceof Array || typeof field !== 'string') return null;
+  for(let index = 0; index < arr.length; index++) {
+    if (arr[index][field] === val) return index;
+  }
+}
+
+/**
+ * @description: 计算内容是否超出wrapper
+ * @param {node} wrapper 父节点
+ * @return {Boolean}
+ */
+export const isOverflowing = wrapper => {
+  const range = document.createRange();
+  range.setStart(wrapper, 0);
+  range.setEnd(wrapper, wrapper.childNodes.length);
+  const rangeWidth = range.getBoundingClientRect().width;
+  const rangeHeight = range.getBoundingClientRect().height;
+  const paddingX = (parseInt(getStyle(wrapper, 'paddingLeft'), 10) || 0) +
+  (parseInt(getStyle(wrapper, 'paddingRight'), 10) || 0);
+  const paddingY = (parseInt(getStyle(wrapper, 'paddingTop'), 10) || 0) +
+  (parseInt(getStyle(wrapper, 'paddingBottom'), 10) || 0);
+
+  return rangeWidth + paddingX > wrapper.offsetWidth || wrapper.scrollWidth > wrapper.offsetWidth || rangeHeight + paddingY > wrapper.offsetHeight || wrapper.scrollHeight > wrapper.offsetHeight;
+}
