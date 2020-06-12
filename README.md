@@ -1,8 +1,8 @@
-# 基于vue-cli4的前端项目模板
+# 基于vue-cli4的前端项目框架
 
-基于vue-cli4的preset，用于快速构建前端工程模板
+基于vue-cli4的preset，用于快速构建前端工程框架
 
-此项目为[vue-cl3-preset-jr](https://github.com/Jim-Rae/vue-cli3-preset-jr)项目的升级版本，由于原vue-cli3-preset-jr项目是基于vue-cli3的前端项目模板，现不兼容vue-cli4，已不再维护。
+此项目为[vue-cl3-preset-jr](https://github.com/Jim-Rae/vue-cli3-preset-jr)项目的升级版本，由于原vue-cli3-preset-jr项目是基于vue-cli3的前端项目框架，现不兼容vue-cli4，已不再维护。
 
 ## 使用说明
 
