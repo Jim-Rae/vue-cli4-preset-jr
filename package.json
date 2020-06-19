@@ -6,7 +6,7 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "vuepress build docs && git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
+    "docs:deploy": "vuepress build docs && git add . && git commit -m vuepress-deploy && git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
   },
   "repository": {
     "type": "git",
