@@ -4,6 +4,10 @@
 
 此项目为[vue-cl3-preset-jr](https://github.com/Jim-Rae/vue-cli3-preset-jr)项目的升级版本，由于原vue-cli3-preset-jr项目是基于vue-cli3的前端项目框架，现不兼容vue-cli4，已不再维护。
 
+## 文档
+
+https://jim-rae.github.io/vue-cli4-preset-jr/
+
 ## 使用说明
 
 ```bash
