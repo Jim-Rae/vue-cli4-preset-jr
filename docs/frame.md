@@ -255,7 +255,84 @@ export default new Vuex.Store({
 
 ## src/utils
 
+该文件夹用于放置工具类函数。
+
+其目录结构为：
+
+```bash
+store
+├── common.js  # 常用工具库
+├── dom.js  # dom 操作
+├── routerHelper.js  # router 工具
+└── validator.js  # 校验器
+```
+
+本框架在该文件夹预设了四种工具类函数，分别为**常用工具函数**、**DOM操作函数**、**router工具函数**和**校验器函数**。
+
+`common.js` 用于放置常用工具函数，如深拷贝、函数去抖、函数节流等工具函数。以独立的函数为单位分别导出各个功能函数。具体例子如下：
+
+```javascript
+/**
+ * 函数去抖
+ *
+ * @method debounce
+ * @param {(...args: any) => void} fn 要去抖的函数
+ * @param {number} delay 去抖时间
+ */
+export const debounce = (fn, delay = 100) => {
+  let timer = 0
+  return function (...args) {
+    timer && clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+```
+
+`dom.js` 用于放置 `DOM API` 相关的操作函数，如事件绑定解绑操作（`on`、`off`、`once`）、类操作（`hasClass`、`addClass`、`removeClass`）等。导出方式同`common.js`。
+
+`routerHelper.js` 用于放置 `Vue-Router` 的辅助工具函数。主要实现路由配置的动态导入、路由扁平化等处理。
+
+其中动态导入路由函数如下：
+```javascript
+/**
+ * 动态导入路由配置
+ * @param {*} ctx require.context 生成的上下文对象，用于自动导入
+ */
+export const importAll = ctx => {
+  const routes = [];
+  ctx.keys().forEach((file) => {
+    // 获取到配置
+    let route = ctx(file).default;
+    // 可能是数组或者对象
+    route = Array.isArray(route) ? route : [route];
+    // 添加进路由缓存
+    routes.push(...route);
+  })
+  return routes;
+};
+```
+
 ## src/view
+
+该文件夹用于放置页面组件。
+
+该文件夹结构可按照实际情况进行调整，预设的目录结构为：
+
+```bash
+view
+├── index  # 首页
+|   ├── components  # 页面通用组件
+|   ├── children  # 子路由页面
+|   ├── index.vue  # 当前页面
+|   └── router.js  # 路由配置
+|
+└── login  # 登录页
+    └── ...
+```
+
+该文件夹是主要的开发目标，所有的页面都放置在该文件夹内，其中的文件结构可以根据实际需求灵活应变。其中 `components` 文件夹代表当前页面下通用组件，`children` 文件夹用于放置子路由页面，其结构可以与 `view` 文件夹一致，`index.vue` 为当前页面组件，也称当前页面入口，该入口会被 `router.js` 导入到 `Vue-Router`。
 
 ## src/router.js
 

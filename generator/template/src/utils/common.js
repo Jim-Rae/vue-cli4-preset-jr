@@ -2,7 +2,7 @@
  * @Author: Jim Rae
  * @Date: 2019-09-04 09:24:22
  * @LastEditors: leijin
- * @LastEditTime: 2020-06-08 17:50:39
+ * @LastEditTime: 2020-06-29 16:02:06
  * @Description: 常用工具库
  */
 
@@ -185,10 +185,11 @@ export const assignObjectNoExtend = (target, ...objs) => {
  * @return {Number}
  */
 export const getIndexByField = (arr, field, val) => {
-  if (!arr instanceof Array || typeof field !== 'string') return null;
+  if (!arr instanceof Array || typeof field !== 'string') return -1;
   for(let index = 0; index < arr.length; index++) {
     if (arr[index][field] === val) return index;
   }
+  return -1;
 }
 
 /**
