@@ -7,7 +7,7 @@
     <meta name="generator" content="VuePress 1.4.1">
     
     <meta name="description" content="">
-    <link rel="preload" href="/vue-cli4-preset-jr/assets/css/0.styles.1424c3e1.css" as="style"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/app.8baedb76.js" as="script"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/2.1185113e.js" as="script"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/7.786af722.js" as="script"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/3.80eba41b.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/4.fca74266.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/5.3be5c6bb.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/6.e92fbccf.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/8.4b5d97b0.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/9.7d6ac55b.js">
+    <link rel="preload" href="/vue-cli4-preset-jr/assets/css/0.styles.1424c3e1.css" as="style"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/app.60b5ef5d.js" as="script"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/2.1185113e.js" as="script"><link rel="preload" href="/vue-cli4-preset-jr/assets/js/7.57d33906.js" as="script"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/3.80eba41b.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/4.fca74266.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/5.3be5c6bb.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/6.e92fbccf.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/8.6e06c87b.js"><link rel="prefetch" href="/vue-cli4-preset-jr/assets/js/9.7d6ac55b.js">
     <link rel="stylesheet" href="/vue-cli4-preset-jr/assets/css/0.styles.1424c3e1.css">
   </head>
   <body>
@@ -168,11 +168,122 @@ ctx<span class="token punctuation">.</span><span class="token function">keys</sp
   <span class="token comment">// 在非production模式中使用日志插件</span>
   plugins<span class="token operator">:</span> debug <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token function">createLogger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre></div><p>在注册器里除了有加载模块的逻辑外，也在开发环境中加入了 <code>vuex/dist/logger</code> 模块的使用。</p> <h2 id="src-utils"><a href="#src-utils" class="header-anchor">#</a> src/utils</h2> <h2 id="src-view"><a href="#src-view" class="header-anchor">#</a> src/view</h2> <h2 id="src-router-js"><a href="#src-router-js" class="header-anchor">#</a> src/router.js</h2> <h2 id="babel"><a href="#babel" class="header-anchor">#</a> babel</h2> <h2 id="public"><a href="#public" class="header-anchor">#</a> public</h2> <h2 id="vue-config-js"><a href="#vue-config-js" class="header-anchor">#</a> vue.config.js</h2> <h2 id="各种配置文件"><a href="#各种配置文件" class="header-anchor">#</a> 各种配置文件</h2></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><p>在注册器里除了有加载模块的逻辑外，也在开发环境中加入了 <code>vuex/dist/logger</code> 模块的使用。</p> <h2 id="src-utils"><a href="#src-utils" class="header-anchor">#</a> src/utils</h2> <p>该文件夹用于放置工具类函数。</p> <p>其目录结构为：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>store
+├── common.js  <span class="token comment"># 常用工具库</span>
+├── dom.js  <span class="token comment"># dom 操作</span>
+├── routerHelper.js  <span class="token comment"># router 工具</span>
+└── validator.js  <span class="token comment"># 校验器</span>
+</code></pre></div><p>本框架在该文件夹预设了四种工具类函数，分别为<strong>常用工具函数</strong>、<strong>DOM操作函数</strong>、<strong>router工具函数</strong>和<strong>校验器函数</strong>。</p> <p><code>common.js</code> 用于放置常用工具函数，如深拷贝、函数去抖、函数节流等工具函数。以独立的函数为单位分别导出各个功能函数。具体例子如下：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/**
+ * 函数去抖
+ *
+ * @method debounce
+ * @param {(...args: any) =&gt; void} fn 要去抖的函数
+ * @param {number} delay 去抖时间
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">debounce</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> delay <span class="token operator">=</span> <span class="token number">100</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> timer <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    timer <span class="token operator">&amp;&amp;</span> <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+    timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>dom.js</code> 用于放置 <code>DOM API</code> 相关的操作函数，如事件绑定解绑操作（<code>on</code>、<code>off</code>、<code>once</code>）、类操作（<code>hasClass</code>、<code>addClass</code>、<code>removeClass</code>）等。导出方式同<code>common.js</code>。</p> <p><code>routerHelper.js</code> 用于放置 <code>Vue-Router</code> 的辅助工具函数。主要实现路由配置的动态导入、路由扁平化等处理。</p> <p>其中动态导入路由函数如下：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/**
+ * 动态导入路由配置
+ * @param {*} ctx require.context 生成的上下文对象，用于自动导入
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">importAll</span> <span class="token operator">=</span> <span class="token parameter">ctx</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  ctx<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 获取到配置</span>
+    <span class="token keyword">let</span> route <span class="token operator">=</span> <span class="token function">ctx</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">.</span>default<span class="token punctuation">;</span>
+    <span class="token comment">// 可能是数组或者对象</span>
+    route <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>route<span class="token punctuation">)</span> <span class="token operator">?</span> route <span class="token operator">:</span> <span class="token punctuation">[</span>route<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 添加进路由缓存</span>
+    routes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>route<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> routes<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="src-view"><a href="#src-view" class="header-anchor">#</a> src/view</h2> <p>该文件夹用于放置页面组件。</p> <p>该文件夹结构可按照实际情况进行调整，预设的目录结构为：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>view
+├── index  <span class="token comment"># 首页</span>
+<span class="token operator">|</span>   ├── components  <span class="token comment"># 页面通用组件</span>
+<span class="token operator">|</span>   ├── children  <span class="token comment"># 子路由页面</span>
+<span class="token operator">|</span>   ├── index.vue  <span class="token comment"># 当前页面</span>
+<span class="token operator">|</span>   └── router.js  <span class="token comment"># 路由配置</span>
+<span class="token operator">|</span>
+└── login  <span class="token comment"># 登录页</span>
+    └── <span class="token punctuation">..</span>.
+</code></pre></div><p>该文件夹是主要的开发目标，所有的页面都放置在该文件夹内，其中的文件结构可以根据实际需求灵活应变。其中 <code>components</code> 文件夹代表当前页面下通用组件，<code>children</code> 文件夹用于放置子路由页面，其结构可以与 <code>view</code> 文件夹一致，<code>index.vue</code> 为当前页面组件，也称当前页面入口，该入口会被 <code>router.js</code> 导入到 <code>Vue-Router</code>。</p> <h2 id="src-router-js"><a href="#src-router-js" class="header-anchor">#</a> src/router.js</h2> <p>该文件是路由配置的入口。</p> <p>主要通过 Webpack 函数 <code>require.context</code> 来导入所有页面路由的配置，同时也预设了默认路由。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> importAll <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/routerHelper.js'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 全局路由</span>
+<span class="token keyword">class</span> <span class="token class-name">GlobalRouter</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 路由表</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_routes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 初始化</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_routes<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 设置默认路由</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setDefaultRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 设置导入的路由</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setImportRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 设置默认路由</span>
+  <span class="token function">setDefaultRoute</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 默认路由</span>
+    <span class="token keyword">const</span> defaultPath <span class="token operator">=</span> <span class="token punctuation">[</span>
+      <span class="token comment">// 任意路由</span>
+      <span class="token punctuation">{</span>
+        path<span class="token operator">:</span> <span class="token string">'*'</span><span class="token punctuation">,</span>
+        redirect<span class="token operator">:</span> <span class="token string">'/'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// 默认路由</span>
+      <span class="token punctuation">{</span>
+        path<span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+        redirect<span class="token operator">:</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'breadcrumbDemo.index'</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_routes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>defaultPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 设置导入的路由</span>
+  <span class="token function">setImportRoute</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// webpack文档规定： require.context参数只接收字面量，不要用变量去控制</span>
+    <span class="token keyword">const</span> ctx <span class="token operator">=</span> require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">'./views'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token regex">/router.js$/</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token function">importAll</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_routes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>routes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  routes<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">GlobalRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+instance<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> instance<span class="token punctuation">;</span>
+
+<span class="token comment">// 解决路由到重复地址时抛出NavigationDuplicated错误</span>
+<span class="token keyword">const</span> originalPush <span class="token operator">=</span> <span class="token class-name">Router</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>push<span class="token punctuation">;</span>
+<span class="token class-name">Router</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">push</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">push</span> <span class="token punctuation">(</span><span class="token parameter">location</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">originalPush</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> location<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=&gt;</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="babel"><a href="#babel" class="header-anchor">#</a> babel</h2> <h2 id="public"><a href="#public" class="header-anchor">#</a> public</h2> <h2 id="vue-config-js"><a href="#vue-config-js" class="header-anchor">#</a> vue.config.js</h2> <h2 id="各种配置文件"><a href="#各种配置文件" class="header-anchor">#</a> 各种配置文件</h2></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/vue-cli4-preset-jr/client.html" class="prev">
         PC端与移动端
       </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/vue-cli4-preset-jr/assets/js/app.8baedb76.js" defer></script><script src="/vue-cli4-preset-jr/assets/js/2.1185113e.js" defer></script><script src="/vue-cli4-preset-jr/assets/js/7.786af722.js" defer></script>
+    <script src="/vue-cli4-preset-jr/assets/js/app.60b5ef5d.js" defer></script><script src="/vue-cli4-preset-jr/assets/js/2.1185113e.js" defer></script><script src="/vue-cli4-preset-jr/assets/js/7.57d33906.js" defer></script>
   </body>
 </html>
