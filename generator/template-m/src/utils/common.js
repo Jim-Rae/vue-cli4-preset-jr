@@ -2,7 +2,7 @@
  * @Author: Jim Rae
  * @Date: 2019-09-04 09:24:22
  * @LastEditors: leijin
- * @LastEditTime: 2020-06-08 17:50:59
+ * @LastEditTime: 2020-07-31 16:49:14
  * @Description: 常用工具库
  */
 
@@ -418,3 +418,12 @@ export const isOverflowing = wrapper => {
 
   return rangeWidth + paddingX > wrapper.offsetWidth || wrapper.scrollWidth > wrapper.offsetWidth || rangeHeight + paddingY > wrapper.offsetHeight || wrapper.scrollHeight > wrapper.offsetHeight;
 }
+
+/**
+ * @description: 睡眠函数
+ * @param {number} ms 睡眠毫秒数
+ * @return {Promise}
+ */
+export const sleep = ms => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
