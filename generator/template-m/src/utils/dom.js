@@ -1,28 +1,28 @@
 import Vue from 'vue';
 
 const isServer = Vue.prototype.$isServer;
-const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+const SPECIAL_CHARS_REGEXP = /([:\-_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
 const ieVersion = isServer ? 0 : Number(document.documentMode);
 
-const trim = function(string) {
+const trim = function (string) {
   return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 };
-const camelCase = function(name) {
-  return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+const camelCase = function (name) {
+  return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
     return offset ? letter.toUpperCase() : letter;
   }).replace(MOZ_HACK_REGEXP, 'Moz$1');
 };
 
-export const on = (function() {
+export const on = (function () {
   if (!isServer && document.addEventListener) {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event && handler) {
         element.addEventListener(event, handler, false);
       }
     };
   } else {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event && handler) {
         element.attachEvent('on' + event, handler);
       }
@@ -30,15 +30,15 @@ export const on = (function() {
   }
 })();
 
-export const off = (function() {
+export const off = (function () {
   if (!isServer && document.removeEventListener) {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event) {
         element.removeEventListener(event, handler, false);
       }
     };
   } else {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event) {
         element.detachEvent('on' + event, handler);
       }
@@ -46,8 +46,8 @@ export const off = (function() {
   }
 })();
 
-export const once = function(el, event, fn) {
-  var listener = function() {
+export const once = function (el, event, fn) {
+  var listener = function () {
     if (fn) {
       fn.apply(this, arguments);
     }
@@ -56,7 +56,7 @@ export const once = function(el, event, fn) {
   on(el, event, listener);
 };
 
-export function hasClass(el, cls) {
+export function hasClass (el, cls) {
   if (!el || !cls) return false;
   if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
   if (el.classList) {
@@ -66,7 +66,7 @@ export function hasClass(el, cls) {
   }
 };
 
-export function addClass(el, cls) {
+export function addClass (el, cls) {
   if (!el) return;
   var curClass = el.className;
   var classes = (cls || '').split(' ');
@@ -86,7 +86,7 @@ export function addClass(el, cls) {
   }
 };
 
-export function removeClass(el, cls) {
+export function removeClass (el, cls) {
   if (!el || !cls) return;
   var classes = cls.split(' ');
   var curClass = ' ' + el.className + ' ';
@@ -106,7 +106,7 @@ export function removeClass(el, cls) {
   }
 };
 
-export const getStyle = ieVersion < 9 ? function(element, styleName) {
+export const getStyle = ieVersion < 9 ? function (element, styleName) {
   if (isServer) return;
   if (!element || !styleName) return null;
   styleName = camelCase(styleName);
@@ -127,7 +127,7 @@ export const getStyle = ieVersion < 9 ? function(element, styleName) {
   } catch (e) {
     return element.style[styleName];
   }
-} : function(element, styleName) {
+} : function (element, styleName) {
   if (isServer) return;
   if (!element || !styleName) return null;
   styleName = camelCase(styleName);
@@ -142,12 +142,12 @@ export const getStyle = ieVersion < 9 ? function(element, styleName) {
   }
 };
 
-export function setStyle(element, styleName, value) {
+export function setStyle (element, styleName, value) {
   if (!element || !styleName) return;
 
   if (typeof styleName === 'object') {
     for (var prop in styleName) {
-      if (styleName.hasOwnProperty(prop)) {
+      if (Object.prototype.hasOwnProperty.call(styleName, prop)) {
         setStyle(element, prop, styleName[prop]);
       }
     }
